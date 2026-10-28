@@ -1,0 +1,7 @@
+export const labels={question:'Question',possible_confusion:'Needs a closer look',learner_explanation:'Learner explanation'};
+// Translate only the built-in fictional demo, without rewriting saved user content.
+export const demoQuestion='I understand averages, but why do we need a confidence interval?';
+export const demoResult={answer:'An average summarizes your sample. But if you choose another sample, its average can change. A confidence interval uses that sampling variation to show a plausible range for the population average.\n\nFor example, the average height of 30 students may be 165 cm, but that does not mean the entire population has exactly that average. Start by comparing averages from several samples.',topic:'Confidence intervals',observation:'Asked why confidence intervals are needed after mentioning an understanding of averages.',signal:'question',path:['Sample mean','Sampling variability','Confidence intervals'],teachingSuggestion:'Compare the averages and intervals from several samples.'};
+export function displayTurn(t){return t.source==='example'&&t.question==='평균은 알겠는데, 신뢰구간이 왜 필요한지 모르겠어요.'?{...t,question:demoQuestion,result:demoResult}:t;}
+export function displayObservation(o){return o.source==='example'&&o.rawText==='평균은 알겠는데, 신뢰구간이 왜 필요한지 모르겠어요.'?{...o,rawText:demoQuestion,topic:demoResult.topic,observation:demoResult.observation,signal:demoResult.signal,path:demoResult.path,teachingSuggestion:demoResult.teachingSuggestion}:o;}
+
