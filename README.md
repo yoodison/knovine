@@ -2,9 +2,9 @@
 
 **Your understanding, connected.**
 
-A local learner-state and classroom prototype. Learning observations retain the learner's words and a suggested concept path. A connected AI can read/write observations through MCP. Students control per-class sharing; teachers inspect evidence, propose lesson changes, and review them before saving.
+A local learner-state and classroom prototype designed for learning across Muse, ChatGPT, Claude, and Knovine itself. Learning observations retain the learner's words and a suggested concept path. A connected AI can read/write observations through MCP. Students control per-class sharing; teachers inspect evidence, propose lesson changes, and review them before saving.
 
-[Watch the three-minute working demo](https://github.com/yoodison/knovine/releases/tag/demo-review-v1) · [Validation](docs/VALIDATION.md)
+[Watch the three-minute working demo](https://github.com/yoodison/knovine/releases/tag/demo-review-v2) · [Validation](docs/VALIDATION.md)
 
 ## Run locally
 
@@ -31,14 +31,18 @@ Open **http://127.0.0.1:4175/?demo=1** and select **Start isolated demo**. This 
 1. Select **Record through MCP**. A separate MCP SDK client sends a real student-scoped tool call. The live teacher iframe shows one observation after its next refresh.
 2. Open **Alex (demo)** to inspect the original question.
 3. Turn sharing off: the observation disappears from the teacher. Turn it on: it returns.
-4. Open **Next lesson → Adapt to shared learning**. Without Meta, the suggestion is explicitly labeled as a local rule.
-5. Edit the suggested lesson, choose **Apply reviewed changes**, then open **Original plan & revision history**.
+4. Open **Next lesson → Adapt lesson**. Without Meta, the suggestion is explicitly labeled as a local rule.
+5. Edit the suggested lesson, choose **Save reviewed plan**, then open **Original plan & revision history**.
 
 The demo control may only act on its newly created fictional learner. A repeated tool call deduplicates the record. Its in-memory authorization ends when the API restarts. The harness is an engineering demonstration, not an automatic ChatGPT agent or simulated Meta response.
 
+## AI connections
+
+The interface brings Muse, ChatGPT, and Claude into one connection chooser. **Muse the agent is a planned connector**, separate from Muse Spark powering conversations inside Knovine. ChatGPT uses the existing private tunnel; Claude has a local MCP setup guide. See [connection paths and verification status](docs/CONNECTIONS.md).
+
 ## Meta integration
 
-**Connections → Meta → Connect** accepts an existing Meta Model API key. It is sent to Meta for verification and held only in server process memory. Restarting the API requires entering it again. Alternatively, provide `MODEL_API_KEY` through the server environment. `META_MODEL` defaults to `muse-spark-1.3`. The app does not automatically load `.env` files.
+**Connections → Learn here with Muse Spark → Connect** accepts an existing Meta Model API key. It is sent to Meta for verification and held only in server process memory. Restarting the API requires entering it again. Alternatively, provide `MODEL_API_KEY` through the server environment. `META_MODEL` defaults to `muse-spark-1.3`. The app does not automatically load `.env` files.
 
 The model receives the question and recent observations to produce validated JSON: explanation, concept, evidence type, observation, suggested path, and provisional teacher suggestion. A second structured workflow proposes lesson revisions. Questions and AI answers are not evidence of verified mastery.
 

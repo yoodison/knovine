@@ -4,7 +4,7 @@ Review build recorded on 29 October 2026. Real local application footage and syn
 
 ## Watch and reproduce
 
-- [Review video and English captions](https://github.com/yoodison/knovine/releases/tag/demo-review-v1)
+- [Review video and English captions](https://github.com/yoodison/knovine/releases/tag/demo-review-v2)
 - Start the app using the README and open `http://127.0.0.1:4175/?demo=1`.
 - The MCP client is real. The learner question is scripted. The lesson proposal is a labeled local rule, and the final revision is entered by a teacher.
 
@@ -12,11 +12,11 @@ Review build recorded on 29 October 2026. Real local application footage and syn
 
 ### 00:00 — Learning, connected.
 
-Knovine connects a learner’s questions to what happens next, for both the learner and the teacher.
+Knovine keeps your learning connected across AI conversations, then turns shared evidence into a better next lesson.
 
 ### 00:08 — 01 / Start with curiosity
 
-Students already learn by asking AI questions. But useful context often stays inside a chat. Knovine gives that context a place to grow. This labeled example starts with averages, then connects sampling variability to confidence intervals. The learner can follow the suggested path or explore the map. These are learning observations, not scores claiming how much someone knows.
+The vision is one learning map across Muse, ChatGPT, and Claude. Muse Spark also powers learning inside Knovine. The external Muse connector is marked Planned; it is separate from the model API. Here, a labeled example connects averages to sampling variability and confidence intervals. Follow the path or explore the map. Observations guide the next question without claiming mastery.
 
 ### 00:36 — 02 / Record through a real MCP client
 
@@ -32,7 +32,7 @@ Sharing belongs to the learner. Here, the demo control turns off Alex’s sharin
 
 ### 01:53 — 05 / Turn a learning moment into a teaching action
 
-Next, the teacher opens the existing lesson. The shared question stays beside the plan. Adapt to shared learning proposes a revision for review. In this recording, the suggestion is explicitly labeled as rule based because Meta is not connected. The Meta structured output workflow is implemented, but successful live inference is still pending.
+Next, the teacher opens the existing lesson. The shared question stays beside the plan. Adapt lesson proposes a revision for review. In this recording, the suggestion is explicitly labeled as rule based because Meta is not connected. The Meta structured output workflow is implemented, but successful live inference is still pending.
 
 ### 02:13 — 06 / Review, revise, and save
 
@@ -41,7 +41,6 @@ The teacher makes the final decision. Here, the plan changes to begin with two i
 ### 02:43 — A better next lesson.
 
 The working core is evidence, consent, and teacher action. The source includes a reproducible demo and twelve passing tests. Meta inference and the full ChatGPT classroom flow remain verification gates before final submission. Knovine: your understanding, connected.
-
 ## What this proves
 
 A student-scoped MCP client writes an observation to the persistent store. Per-class consent controls teacher visibility. The teacher can inspect evidence and save a reviewed revision while preserving the original plan.
@@ -52,6 +51,6 @@ The external ChatGPT classroom workflow and successful live Meta inference remai
 
 ## Editing sources
 
-The release includes an English SRT caption file. The 21st review project preserves eight footage scenes; its available export path is capped at 900 frames (30 seconds), so the complete three-minute deliverable is assembled locally with FFmpeg. No hosted generation was used to bypass that limit.
+The release includes an English SRT caption file. The updated three-minute deliverable is assembled locally with FFmpeg. The earlier 21st review project is retained as revision 1; its export path is capped at 900 frames (30 seconds). No hosted generation was used to bypass that limit.
 
-[Editable 21st review project](https://21st.dev/community/video/editor/dde6e1cd-3507-4774-afde-6441a9b75d99?host=codex). Requires the project owner’s access.
+[Earlier 21st review project (revision 1)](https://21st.dev/community/video/editor/dde6e1cd-3507-4774-afde-6441a9b75d99?host=codex). Requires the project owner’s access.

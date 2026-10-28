@@ -20,7 +20,16 @@
 - A real request in Meta's official playground returned “Billing verification failed”. It is not recorded as an inference success.
 - Successful live Meta learning and lesson-revision outputs remain unverified.
 - The private ChatGPT tunnel is stopped. Full ChatGPT student-to-teacher end-to-end verification remains pending.
-- Public app deployment, final publishing consent, and final competition submission remain pending.
+- Public app deployment and final competition submission remain pending.
 - Repository and video publication are tracked separately in the README.
 
 The local sample classroom is fictional. It must not be used as evidence of a live model response, real student progress, or measured educational impact.
+
+## Multi-assistant and minimal interface revision
+
+- Home includes Muse, ChatGPT, and Claude, with Muse agent labeled Planned and in-app Muse Spark configured separately. No new connector or live-model capability is claimed.
+- Browser checks: provider chooser, Muse-to-model setup, existing ChatGPT setup, example conversation, path disclosure, concept map, and teacher reviewed revision all functioned.
+- Home fits a 1280x720 desktop and 390x844 phone viewport with no horizontal overflow. Mobile concepts use a vertical layout; navigation bounds stay inside the viewport. Temporary emulation was cleared.
+- Real MCP demonstration re-recorded: observation reached the teacher, sharing off/on removed/restored it, and a revised lesson saved with its original.
+- 12 tests and production build passed. 21st review reported two informational color-token findings, no reported accessibility findings; this does not constitute a full accessibility audit.
+- Revision 2 video adds the Muse/ChatGPT/Claude direction and uses the updated UI.
