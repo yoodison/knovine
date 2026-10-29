@@ -1,5 +1,14 @@
 # Validation record — 29 October 2026
 
+## Discord-informed provider and verification update
+
+- Current local suite: **26 tests passed**, plus production build. Earlier 12-test results below describe the published v2 snapshot.
+- Added a Baseten adapter for the hackathon Meta Muse Spark Open slug. Verified its endpoint, separate-key selection, function-call request shape, and result parsing with controlled fixtures; no live provider request was made by these tests.
+- Rejected truncated completions, refusals, malformed results, unknown/multiple tool calls, invalid evidence labels, blank and oversized fields. Failure cases left the in-memory test database empty or the original lesson unchanged.
+- Provider failures do not switch providers automatically. Newly accepted results retain provider/model provenance.
+- Source packaging now lists public documents explicitly, excluding private submission notes even when run from the development checkout.
+- Live model inference and full ChatGPT classroom verification are still pending. The published v2 video is unchanged.
+
 ## Passed
 
 - Unit and protocol suite: 12 tests passed. Includes real SDK calls to the local MCP server, per-class ownership, consent filtering, duplicate-write handling, persistence, preservation of original lesson plans, and isolation of sample classrooms.

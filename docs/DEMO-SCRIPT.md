@@ -2,6 +2,8 @@
 
 Review build recorded on 29 October 2026. Real local application footage and synthetic English narration. All learner data is fictional. No live model inference is shown.
 
+The timeline below transcribes the published **v2 review recording**. It has not been replaced by the submission-cut plan described at the end.
+
 ## Watch and reproduce
 
 - [Review video and English captions](https://github.com/yoodison/knovine/releases/tag/demo-review-v2)
@@ -54,3 +56,13 @@ The external ChatGPT classroom workflow and successful live Meta inference remai
 The release includes an English SRT caption file. The updated three-minute deliverable is assembled locally with FFmpeg. The earlier 21st review project is retained as revision 1; its export path is capped at 900 frames (30 seconds). No hosted generation was used to bypass that limit.
 
 [Earlier 21st review project (revision 1)](https://21st.dev/community/video/editor/dde6e1cd-3507-4774-afde-6441a9b75d99?host=codex). Requires the project owner’s access.
+
+## Next recording: submission-cut plan, not yet recorded
+
+Opening draft, subject to the contribution review: “The learner-state idea predates this event. This demo shows Knovine’s event build: learning evidence, class sharing, and teacher-reviewed lesson changes.”
+
+Use the first 10 seconds to state that distinction. Show a real Meta-powered learning turn and saved concept path, then a real student-scoped MCP write, class sharing off/on, and a real Meta lesson proposal that a teacher edits and saves. Keep the narrative centered on one learner question changing the next lesson. Show the selected provider/model and the original evidence briefly; place technical setup in the README.
+
+The main recording should use Meta models for runtime inference. External ChatGPT/Claude compatibility remains part of the product, but its inclusion in the judged runtime demonstration needs clarification because Discord guidance conflicts. A separate local MCP client can demonstrate the interoperability boundary without calling a non-Meta model. Do not label that client as ChatGPT or Muse.
+
+Before recording: verify both live Meta workflows, finish the contribution inventory, resolve the external-runtime question if showing ChatGPT, and obtain the owner’s final review. Keep v2 available until a replacement genuinely demonstrates the claimed flow.

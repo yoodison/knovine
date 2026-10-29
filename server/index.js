@@ -1,5 +1,6 @@
 import http from 'node:http';
 import { askMeta, proposeLesson } from './model.js';
+import { modelConfig, modelKey } from './model-provider.js';
 import { createStore } from './store.js';
 import { createClassroom } from './classroom.js';
 import { createDemoClassroom } from './demo.js';
@@ -8,7 +9,8 @@ import { startTunnel, tunnelStatus, stopTunnel } from './tunnel.js';
 const port = Number(process.env.PORT || 4176), store=createStore();
 const classroom=createClassroom(store);
 const demoBridge=createDemoBridge(classroom);
-let sessionKey=process.env.MODEL_API_KEY || '';
+const selectedModel=modelConfig();
+let sessionKey=modelKey(selectedModel.provider);
 const json=(res,status,body)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(body));};
 const validHost = host => [`127.0.0.1:${port}`,`localhost:${port}`].includes(host);
 http.createServer(async(req,res)=>{
@@ -22,7 +24,7 @@ http.createServer(async(req,res)=>{
     if(url.pathname==='/api/classroom/lessons'&&req.method==='GET') return json(res,200,{lessons:classroom.getLessons(secret,url.searchParams.get('classId'))});
     if(url.pathname==='/api/classroom/observations'&&req.method==='GET') return json(res,200,{observations:classroom.listMine(secret)});
     if(url.pathname==='/api/tunnel/status'&&req.method==='GET') return json(res,200,await tunnelStatus());
-    if(url.pathname==='/api/status'&&req.method==='GET') return json(res,200,{configured:Boolean(sessionKey),model:process.env.META_MODEL||'muse-spark-1.3'});
+    if(url.pathname==='/api/status'&&req.method==='GET') return json(res,200,{configured:Boolean(sessionKey),model:selectedModel.model,provider:selectedModel.provider,label:selectedModel.label});
     if(url.pathname==='/api/state'&&req.method==='GET') return json(res,200,{turns:store.listTurns(),observations:store.listObservations({includeExamples:true}),shared:store.isShared(),plans:store.listPlans()});
     if(req.method!=='POST') return json(res,404,{error:'Not found'});
     let raw=''; for await(const chunk of req){raw+=chunk;if(raw.length>80000)return json(res,413,{error:'Request too large'});}
@@ -45,10 +47,11 @@ http.createServer(async(req,res)=>{
       const plan=classroom.getLesson(secret,body.id);
       const observations=classroom.roster(secret,plan.classId).flatMap(s=>s.observations).slice(0,12);
       if(!observations.length) return json(res,400,{error:'No learning observations are shared with this class yet.'});
-      if(sessionKey) {const proposal=await proposeLesson({plan:plan.current,observations:observations.map(o=>({topic:o.topic,signal:o.signal,observation:o.summary,rawText:o.rawText}))},{apiKey:sessionKey});return json(res,200,{...proposal,source:'meta'});}
+      if(sessionKey) {const proposal=await proposeLesson({plan:plan.current,observations:observations.map(o=>({topic:o.topic,signal:o.signal,observation:o.summary,rawText:o.rawText}))},{apiKey:sessionKey,provider:selectedModel.provider});return json(res,200,{...proposal,source:'meta'});}
       const o=observations[0];return json(res,200,{reason:`Shared observation: ${o.summary}`,revisedPlan:`${plan.current}\n\n[Suggested addition — teacher review required]\nReview the question about “${o.topic}” and revisit the related concept.`,source:'template'});
     }
     if(url.pathname==='/api/key') {
+      if(selectedModel.provider!=='meta') return json(res,400,{error:'This server uses Baseten. Configure BASETEN_API_KEY in the server environment and restart it. Do not enter a Meta key here.'});
       if(typeof body.key!=='string'||!body.key.trim()||body.key.length>500) return json(res,400,{error:'Please check your API key.'});
       const response=await fetch('https://api.meta.ai/v1/models',{headers:{Authorization:`Bearer ${body.key.trim()}`},signal:AbortSignal.timeout(15000)});
       if(!response.ok) return json(res,401,{error:'Meta could not verify the key. Check the key and account status.'});
@@ -59,7 +62,7 @@ http.createServer(async(req,res)=>{
       if(typeof question!=='string'||!question.trim()||question.length>2000)return json(res,400,{error:'Please check your question.'});
       const all=store.listTurns().filter(t=>t.source!=='example'), history=all.slice(-4).flatMap(t=>[{role:'user',content:t.question},{role:'assistant',content:t.result.answer}]);
       const observations=store.listObservations().slice(0,8);
-      const result=await askMeta({question,history,observations},{apiKey:sessionKey});
+      const result=await askMeta({question,history,observations},{apiKey:sessionKey,provider:selectedModel.provider});
       return json(res,200,{turn:store.addTurn(question.trim(),result,'meta')});
     }
     if(url.pathname==='/api/example') {
@@ -73,11 +76,28 @@ http.createServer(async(req,res)=>{
       const plan=store.getPlan(body.id);if(!plan)return json(res,404,{error:'Lesson plan not found.'});
       const observations=store.isShared()?store.listObservations({includeExamples:true}).slice(0,12):[];
       if(!observations.length)return json(res,400,{error:'Turn on sharing first.'});
-      if(sessionKey) {const proposal=await proposeLesson({plan:plan.current,observations:observations.map(({topic,signal,observation,rawText})=>({topic,signal,observation,rawText}))},{apiKey:sessionKey});return json(res,200,{...proposal,source:'meta'});}
+      if(sessionKey) {const proposal=await proposeLesson({plan:plan.current,observations:observations.map(({topic,signal,observation,rawText})=>({topic,signal,observation,rawText}))},{apiKey:sessionKey,provider:selectedModel.provider});return json(res,200,{...proposal,source:'meta'});}
       const o=observations[0], note=o.teachingSuggestion||`Review the learner’s question about “${o.topic}” and briefly revisit the related concept.`;
       return json(res,200,{reason:`Shared observation: ${o.observation}`,revisedPlan:`${plan.current}\n\n[Suggested addition — teacher review required]\n${note}`,source:'template'});
     }
     if(url.pathname==='/api/plan/accept') return json(res,200,{plan:store.acceptPlan(body.id,body.content,body.reason||'Teacher applied the reviewed changes')});
     return json(res,404,{error:'Not found'});
-  } catch(err) { const msg=String(err?.message||''); if(msg==='UNAUTHORIZED')return json(res,401,{error:'Your session is unavailable. Start again on this device.'}); if(msg==='FORBIDDEN')return json(res,403,{error:'You do not have access to this class.'}); if(msg==='META_KEY_MISSING')return json(res,503,{error:'Connect a Meta API key first.'}); if(msg.startsWith('INVALID_')||err instanceof SyntaxError)return json(res,400,{error:'Please check your input.'}); console.error('Request failed:',msg.startsWith('META_HTTP_')?msg:'processing error'); const known={'META_HTTP_401':'Meta rejected the API key. Check the key and try again.','META_HTTP_402':'Check the billing or credit status of your Meta account.','META_HTTP_403':'This account needs model access or billing setup.','META_HTTP_429':'Meta request limit reached. Try again shortly.'}; return json(res,502,{error:known[msg]||'Could not complete the request. Check your connection and input.'}); }
+  } catch(err) {
+    const msg=String(err?.message||'');
+    if(msg==='UNAUTHORIZED')return json(res,401,{error:'Your session is unavailable. Start again on this device.'});
+    if(msg==='FORBIDDEN')return json(res,403,{error:'You do not have access to this class.'});
+    if(msg==='MODEL_KEY_MISSING')return json(res,503,{error:'Connect the configured model provider first.'});
+    if(msg.startsWith('INVALID_')||err instanceof SyntaxError)return json(res,400,{error:'Please check your input.'});
+    const known={
+      MODEL_HTTP_401:'The model provider rejected the API key. Check the key and try again.',
+      MODEL_HTTP_402:'Check billing or credits with the selected model provider.',
+      MODEL_HTTP_403:'This account needs model access or billing setup.',
+      MODEL_HTTP_429:'Model request limit reached. Try again shortly.',
+      MODEL_OUTPUT_INCOMPLETE:'The model response was incomplete. Nothing was saved. Please try again.',
+      MODEL_OUTPUT_REFUSED:'The model declined this request. Nothing was saved. Try rephrasing your question.',
+      MODEL_OUTPUT_INVALID:'The model returned an unusable result. Nothing was saved. Please try again.'
+    };
+    console.error('Request failed:',Object.hasOwn(known,msg)?msg:'processing error');
+    return json(res,502,{error:known[msg]||'Could not complete the request. Check your connection and input.'});
+  }
 }).listen(port,'127.0.0.1',()=>console.log(`Local API listening on http://127.0.0.1:${port}`));

@@ -5,7 +5,9 @@ import hashlib
 
 root = Path(__file__).resolve().parent.parent
 files = [root / p for p in ['package.json', 'package-lock.json', 'vite.config.js', 'index.html', 'README.md', '.gitignore', '.env.example']]
-for folder in ['src', 'server', 'tests', 'docs', 'scripts']:
+public_docs = ['CONTRIBUTIONS.md', 'CONNECTIONS.md', 'DEMO-SCRIPT.md', 'DESIGN.md', 'VALIDATION.md', 'MODEL-PROVIDERS.md']
+files.extend(root / 'docs' / name for name in public_docs)
+for folder in ['src', 'server', 'tests', 'scripts']:
     files.extend(p for p in (root / folder).rglob('*') if p.is_file() and not p.is_symlink() and p.suffix in {'.js', '.jsx', '.css', '.md', '.py'})
 files = sorted(set(p for p in files if p.is_file() and not p.is_symlink()))
 out = root / 'output' / 'knovine-source-review.zip'
@@ -18,5 +20,6 @@ with ZipFile(out) as archive:
         parts = Path(name).parts
         assert not any(p in {'data', 'node_modules', 'dist', '.git'} for p in parts)
         assert not Path(name).name.startswith('.env') or Path(name).name == '.env.example'
+        assert '/docs/' not in name or Path(name).name in public_docs
 print(f'Created {out.name}: {len(files)} source files, {out.stat().st_size} bytes')
 print('SHA-256:', hashlib.sha256(out.read_bytes()).hexdigest())

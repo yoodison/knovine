@@ -46,6 +46,8 @@ The interface brings Muse, ChatGPT, and Claude into one connection chooser. **Mu
 
 The model receives the question and recent observations to produce validated JSON: explanation, concept, evidence type, observation, suggested path, and provisional teacher suggestion. A second structured workflow proposes lesson revisions. Questions and AI answers are not evidence of verified mastery.
 
+An explicit **Baseten → Meta Muse Spark Open** route is also implemented for an issued hackathon key. It uses validated function arguments because that model does not support JSON Schema output. Both routes reject incomplete or unusable responses before saving. See [provider configuration and live verification steps](docs/MODEL-PROVIDERS.md). This alternative has not yet been verified with a live key.
+
 **Current live status, 29 October 2026:** Meta's official playground rejected the verification request with “Billing verification failed”. Request construction/output validation are tested, but successful live Meta inference is still pending. Without a connected key, the teacher preview uses a visibly labeled local rule.
 
 ## Classroom and connector

@@ -8,12 +8,12 @@ export const aiProviders = [
   {id:'claude', name:'Claude', mark:'c', note:'Local setup'},
 ];
 
-export default function AIConnections({initial='', configured, onMeta}) {
+export default function AIConnections({initial='', configured, modelLabel='Muse Spark', onMeta}) {
   const [selected, setSelected] = useState(initial);
   return <div className="ai-connections">
     {!selected ? <>
       <button className="in-app-model" onClick={onMeta}>
-        <Sparkles size={18}/><span><b>Learn here with Muse Spark</b><small>{configured?'API key verified':'Connect Meta to begin'}</small></span><ArrowRight size={17}/>
+        <Sparkles size={18}/><span><b>Learn here with {modelLabel}</b><small>{configured?'Model key configured':'Connect Meta to begin'}</small></span><ArrowRight size={17}/>
       </button>
       <p className="connection-section-label">Or bring your AI</p>
       <div className="provider-list">{aiProviders.map(p=><button key={p.id} onClick={()=>setSelected(p.id)}>
@@ -26,7 +26,7 @@ export default function AIConnections({initial='', configured, onMeta}) {
         <h2>Learn in Muse.<br/>Keep the connections.</h2>
         <p>A shared learning map, wherever your curiosity takes you.</p>
         <details><summary>Connection status</summary><p>The external Muse connector is planned and is not connected yet. The goal is to read and save permitted learning observations from Muse conversations.</p><a href="https://platform.muse.ai/" target="_blank" rel="noreferrer">Muse Connector Platform <ArrowRight size={14}/></a></details>
-        <button className="outline" onClick={onMeta}>Use Muse Spark here <ArrowRight size={15}/></button>
+        <button className="outline" onClick={onMeta}>Use {modelLabel} here <ArrowRight size={15}/></button>
       </section>}
       {selected==='chatgpt'&&<TunnelPanel/>}
       {selected==='claude'&&<section className="provider-detail">
