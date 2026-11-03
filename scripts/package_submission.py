@@ -5,7 +5,7 @@ import hashlib
 
 root = Path(__file__).resolve().parent.parent
 files = [root / p for p in ['package.json', 'package-lock.json', 'vite.config.js', 'index.html', 'README.md', 'LICENSE', '.gitignore', '.env.example']]
-public_docs = ['CONTRIBUTIONS.md', 'CONNECTIONS.md', 'DEMO-SCRIPT.md', 'DESIGN.md', 'VALIDATION.md', 'MODEL-PROVIDERS.md']
+public_docs = ['CONTRIBUTIONS.md', 'CONNECTIONS.md', 'DEMO-SCRIPT.md', 'DESIGN.md', 'VALIDATION.md', 'MODEL-PROVIDERS.md', 'PLATFORM.md']
 files.extend(root / 'docs' / name for name in public_docs)
 for folder in ['src', 'server', 'tests', 'scripts']:
     files.extend(p for p in (root / folder).rglob('*') if p.is_file() and not p.is_symlink() and p.suffix in {'.js', '.jsx', '.css', '.md', '.py'})

@@ -2,7 +2,9 @@
 
 **Your understanding, connected.**
 
-A local learner-state and classroom prototype designed for learning across Muse, ChatGPT, Claude, and Knovine itself. Learning observations retain the learner's words and a suggested concept path. A connected AI can read/write observations through MCP. Students control per-class sharing; teachers inspect evidence, propose lesson changes, and review them before saving.
+A local learner-state platform for personal study, schools, and academies. Start with a question or choose a subject scope; keep learning evidence across compatible AI clients; connect selected observations to a teacher's next lesson. Students control per-class sharing, and teachers review proposed changes before saving.
+
+**November 4 platform revision:** one-click personal onboarding; school/academy learner and teacher paths; a 155-concept mathematics guide and a 52-skill English guide; user-defined course graphs; and learner-scoped MCP configuration downloads. See [platform behavior and verified boundaries](docs/PLATFORM.md). The earlier review video predates this interface revision.
 
 [Watch the three-minute working demo](https://github.com/yoodison/knovine/releases/tag/demo-review-v2) · [Validation](docs/VALIDATION.md)
 
@@ -17,7 +19,7 @@ npm run api
 npm run dev
 ```
 
-Open http://127.0.0.1:4175. Choose **Try an example** for a clearly labeled fictional conversation or **Classroom → Preview a sample class** for a fictional teacher workspace. Previewing the conversation does not add records to the database. The sample classroom creates a separate local demo teacher, class, and fictional students without changing existing classes.
+Open http://127.0.0.1:4175. Choose **For myself → Start learning** to begin without a fixed subject, or select a subject first. School and academy users can create a class or join with an invite. Local browser profiles retain their learning records; use fictional data. Earlier local records remain at `/?legacy=1`. The isolated fictional protocol demonstration remains at `/?demo=1`.
 
 ```sh
 npm test
@@ -38,7 +40,7 @@ The demo control may only act on its newly created fictional learner. A repeated
 
 ## AI connections
 
-The interface brings Muse, ChatGPT, and Claude into one connection chooser. **Muse the agent is a planned connector**, separate from Muse Spark powering conversations inside Knovine. ChatGPT uses the existing private tunnel; Claude has a local MCP setup guide. See [connection paths and verification status](docs/CONNECTIONS.md).
+The connection chooser includes Muse, ChatGPT, Claude, and Gemini. **Muse the agent is a planned connector**, separate from in-app Muse Spark. ChatGPT uses the existing private tunnel; Claude Desktop and Gemini CLI can use the downloaded local MCP config. A permitted manual learning-moment import works with any AI. Host-specific verification is tracked in [connection paths](docs/CONNECTIONS.md); a UI entry does not mean a client is connected.
 
 ## Meta integration
 
@@ -48,7 +50,7 @@ The model receives the question and recent observations to produce validated JSO
 
 An explicit **Baseten → Meta Muse Spark Open** route is also implemented for an issued hackathon key. It uses validated function arguments because that model does not support JSON Schema output. Both routes reject incomplete or unusable responses before saving. See [provider configuration and live verification steps](docs/MODEL-PROVIDERS.md). This alternative has not yet been verified with a live key.
 
-**Current live status, 4 November 2026:** Meta's official playground again rejected the verification request with “Billing verification failed”. The 26-test suite and build pass, and the MCP-to-teacher consent/revision workflow was checked again in the browser. Successful live Meta inference remains pending. Without a connected key, the teacher preview uses a visibly labeled local rule.
+**Current live status, 4 November 2026:** Meta's official playground again rejected the verification request with “Billing verification failed”. The 34-test suite and build pass, and the MCP-to-teacher consent/revision workflow was checked again in the browser. Successful live Meta inference remains pending. Without a connected key, the teacher preview uses a visibly labeled local rule.
 
 ## Classroom and connector
 

@@ -22,3 +22,7 @@ Work completed on 29 October after the review-v2 snapshot includes a dedicated B
 - Demo: recordings of the actual local application with fictional learner data. English synthetic narration uses the macOS Samantha voice. Title cards and assembly were authored locally; the 21st editor is a review/editing companion.
 
 Third-party packages retain their own licenses. No ownership of third-party designs or code is asserted. Public visibility is not a production-readiness or educational-validity claim.
+
+## November 4 platform work
+
+Personal/school/academy entry, account-scoped learning state, original subject concept inventories, custom course scope import, clustered graph navigation, learner-bound local MCP configuration export, and platform/connector tests were added in this revision. The original math inventory uses the MOE's domain framing as a reference; it is not an imported official graph. See PLATFORM.md for provenance and verified boundaries. The graph layout is original code; the existing 21st-derived Composer and native Dialog are reused. No new video was planned or made for this revision.

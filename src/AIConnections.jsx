@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import {ArrowLeft, ArrowRight, ChevronRight, Sparkles} from 'lucide-react';
 import TunnelPanel from './TunnelPanel.jsx';
+import CaptureMoment from './CaptureMoment.jsx';
+import LocalMcpSetup from './LocalMcpSetup.jsx';
 
 export const aiProviders = [
   {id:'muse', name:'Muse', mark:'m', note:'Planned'},
   {id:'chatgpt', name:'ChatGPT', mark:'g', note:'Private connector'},
   {id:'claude', name:'Claude', mark:'c', note:'Local setup'},
+  {id:'gemini', name:'Gemini', mark:'g', note:'CLI / MCP setup'},
 ];
 
-export default function AIConnections({initial='', configured, modelLabel='Muse Spark', onMeta}) {
+export default function AIConnections({initial='', configured, modelLabel='Muse Spark', onMeta,classId,onRecorded}) {
   const [selected, setSelected] = useState(initial);
   return <div className="ai-connections">
     {!selected ? <>
@@ -29,6 +32,7 @@ export default function AIConnections({initial='', configured, modelLabel='Muse 
         <button className="outline" onClick={onMeta}>Use {modelLabel} here <ArrowRight size={15}/></button>
       </section>}
       {selected==='chatgpt'&&<TunnelPanel/>}
+      {selected==='gemini'&&<section className="provider-detail"><div className="provider-title"><h3>Gemini</h3><span className="tag">CLI setup</span></div><h2>Keep the context.<br/>Choose your AI.</h2><p>Knovine exposes the same MCP tools for compatible clients, including Gemini CLI. The consumer Gemini website is not connected by this setup.</p><details><summary>Setup guide</summary><p>Use the local Knovine MCP server with your learner-scoped session. Call get_knowledge_graph and get_learning_context before an explanation, then record an authorized learning observation.</p><a href="https://geminicli.com/docs/tools/mcp-server/" target="_blank" rel="noreferrer">Gemini CLI MCP setup ↗</a></details></section>}
       {selected==='claude'&&<section className="provider-detail">
         <div className="provider-title"><span className="provider-mark claude">c</span><h3>Claude</h3><span className="tag">Setup required</span></div>
         <h2>Your next conversation.<br/>With more context.</h2>
@@ -36,6 +40,8 @@ export default function AIConnections({initial='', configured, modelLabel='Muse 
         <details><summary>Setup guide</summary><p>Configure the local server using the guide below. The MCP tools have been tested; Claude app verification is still pending. No connection is created by opening this screen.</p><a href="https://github.com/yoodison/knovine/blob/main/docs/CONNECTIONS.md#claude" target="_blank" rel="noreferrer">Open setup guide <ArrowRight size={14}/></a></details>
       </section>}
     </>}
+    {onRecorded&&['claude','gemini'].includes(selected)&&<LocalMcpSetup/>}
     <details className="connection-privacy"><summary>Your sharing, your choice</summary><p>Only permitted tool calls read or save observations. Connecting an AI does not automatically import every conversation. Classroom sharing is controlled separately.</p></details>
+    {onRecorded&&<CaptureMoment classId={classId} onRecorded={onRecorded}/>}
   </div>;
 }

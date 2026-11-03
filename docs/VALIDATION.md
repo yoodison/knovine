@@ -52,3 +52,16 @@ The local sample classroom is fictional. It must not be used as evidence of a li
 - Real MCP demonstration re-recorded: observation reached the teacher, sharing off/on removed/restored it, and a revised lesson saved with its original.
 - 12 tests and production build passed. 21st review reported two informational color-token findings, no reported accessibility findings; this does not constitute a full accessibility audit.
 - Revision 2 video adds the Muse/ChatGPT/Claude direction and uses the updated UI.
+
+## Personal / school / academy platform revision
+
+- 34 tests and production build passed. Added per-learner platform state, 155-concept math / 52-skill English scopes, additive custom course imports, latest-evidence labels, and a real learner-bound MCP configuration round trip.
+- Browser: personal entry took one click with no subject requirement. Choosing math opened 155 concepts; an explicitly imported fictional Gemini learning question appeared as original evidence for Equivalent fractions. Concept selection, zoom/fit, a Fractions-to-Equivalent-fractions route, and source links worked.
+- Browser: an academy teacher created a biology class and a five-concept custom scope. A new invited learner inherited it and could not edit it. An explicitly imported fictional Claude question became visible to the teacher and course graph after class sharing was enabled.
+- The shared MCP test reads the large course scope, records a real tool observation, reads its context, denies another teacher's class, and observes sharing off/on. Actual Claude/Gemini host applications and the full ChatGPT classroom flow remain separate pending checks.
+- Fresh Meta Playground request still returned Billing verification failed. The team's Billing iframe still displayed no payment methods. The reported card registration is not treated as an inference success.
+- Existing SQLite records were backed up privately before additive schema changes. Earlier personal records remain accessible from the legacy workspace. Local profiles are retained on the device; this is not production authentication.
+- 21st catalog lookup returned HTTP 401. Existing Composer/Dialog patterns were reused. Local 21st review was run; informational findings and final responsive evidence are recorded in the handoff.
+- No video work or final competition submission was performed in this revision.
+
+- Responsive check: 390px viewport had no horizontal overflow on the course map; viewport emulation was reset. The local MCP config downloaded successfully and referenced a private learner binding without embedding its bearer token. A new browser tab restored the selected device profile and its learning record.

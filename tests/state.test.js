@@ -16,7 +16,7 @@ test('external MCP write is durable, deduplicated and visible to the same local 
   const transport=new StdioClientTransport({command:process.execPath,args:[resolve('server/mcp.js')],env:{...process.env,KNOVINE_DB:file},stderr:'pipe'});
   try {
     await client.connect(transport);
-    const tools=await client.listTools(); assert.deepEqual(tools.tools.map(t=>t.name).sort(),['get_learning_context','get_learning_path','record_learning_observation']);
+    const tools=await client.listTools(); assert.deepEqual(tools.tools.map(t=>t.name).sort(),['get_knowledge_graph','get_learning_context','get_learning_path','record_learning_observation']);
     const args={rawText:'왜 비율이 달라지죠?',topic:'비율',signal:'question',observation:'비율이 달라지는 이유를 질문함',path:['분수','비율'],externalId:'test-event-1'};
     const first=await client.callTool({name:'record_learning_observation',arguments:args});
     assert.equal(first.isError,undefined);

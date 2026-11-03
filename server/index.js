@@ -5,9 +5,13 @@ import { createStore } from './store.js';
 import { createClassroom } from './classroom.js';
 import { createDemoClassroom } from './demo.js';
 import { createDemoBridge } from './demo-bridge.js';
+import {createLearning} from './learning.js';
+import {catalog} from './knowledge.js';
+import {createLocalConnector} from './connector.js';
 import { startTunnel, tunnelStatus, stopTunnel } from './tunnel.js';
 const port = Number(process.env.PORT || 4176), store=createStore();
 const classroom=createClassroom(store);
+const learning=createLearning(store,classroom);
 const demoBridge=createDemoBridge(classroom);
 const selectedModel=modelConfig();
 let sessionKey=modelKey(selectedModel.provider);
@@ -19,6 +23,10 @@ http.createServer(async(req,res)=>{
   if(req.method!=='GET' && !['http://127.0.0.1:4175','http://localhost:4175'].includes(req.headers.origin)) return json(res,403,{error:'Origin not allowed'});
   try {
     const secret=req.headers.authorization?.match(/^Bearer (.+)$/)?.[1] || '';
+    if(url.pathname==='/api/catalog'&&req.method==='GET')return json(res,200,{packs:catalog()});
+    if(url.pathname==='/api/learning/profile'&&req.method==='GET')return json(res,200,{profile:learning.profile(secret),classes:classroom.getClasses(secret)});
+    if(url.pathname==='/api/learning/state'&&req.method==='GET')return json(res,200,learning.state(secret,url.searchParams.get('classId')||null));
+    if(url.pathname==='/api/learning/graph'&&req.method==='GET')return json(res,200,{graph:learning.graph(secret,url.searchParams.get('classId')||null),profile:learning.profile(secret),classes:classroom.getClasses(secret)});
     if(url.pathname==='/api/classroom/me'&&req.method==='GET') return json(res,200,{actor:classroom.authenticate(secret),classes:classroom.getClasses(secret)});
     if(url.pathname==='/api/classroom/roster'&&req.method==='GET') return json(res,200,{students:classroom.roster(secret,url.searchParams.get('classId'))});
     if(url.pathname==='/api/classroom/lessons'&&req.method==='GET') return json(res,200,{lessons:classroom.getLessons(secret,url.searchParams.get('classId'))});
@@ -29,6 +37,19 @@ http.createServer(async(req,res)=>{
     if(req.method!=='POST') return json(res,404,{error:'Not found'});
     let raw=''; for await(const chunk of req){raw+=chunk;if(raw.length>80000)return json(res,413,{error:'Request too large'});}
     const body=JSON.parse(raw||'{}');
+    if(url.pathname==='/api/learning/start')return json(res,200,learning.start(body));
+    if(url.pathname==='/api/learning/connector')return json(res,200,createLocalConnector(classroom,secret));
+    if(url.pathname==='/api/learning/profile')return json(res,200,{profile:learning.setProfile(secret,body)});
+    if(url.pathname==='/api/learning/class-scope')return json(res,200,{scope:learning.setClassScope(secret,body)});
+    if(url.pathname==='/api/learning/graph/import')return json(res,200,{graph:learning.importGraph(secret,body.classId||null,body.graph)});
+    if(url.pathname==='/api/learning/observation'){classroom.authenticate(secret,'student');learning.scope(secret,body.classId||null);return json(res,200,{observation:classroom.addObservation(secret,{...body,source:'external'})});}
+    if(url.pathname==='/api/learning/ask'){
+      if(typeof body.question!=='string'||!body.question.trim()||body.question.length>2000)throw Error('INVALID_QUESTION');
+      const context=learning.state(secret,body.classId||null);
+      const history=context.turns.slice(-3).flatMap(t=>[{role:'user',content:t.question},{role:'assistant',content:t.result.answer}]);
+      const result=await askMeta({question:body.question,history,observations:context.observations,curriculum:{title:context.graph.title,concepts:context.graph.nodes.map(n=>n.label)}},{apiKey:sessionKey,provider:selectedModel.provider});
+      return json(res,200,{turn:learning.saveTurn(secret,{question:body.question.trim(),result,classId:body.classId||null})});
+    }
     if(url.pathname==='/api/demo/session') return json(res,200,demoBridge.start());
     if(url.pathname==='/api/demo/record') return json(res,200,await demoBridge.record(secret));
     if(url.pathname==='/api/demo/share') return json(res,200,demoBridge.share(secret,body.enabled));
@@ -36,11 +57,11 @@ http.createServer(async(req,res)=>{
     if(url.pathname==='/api/tunnel/start') {if(body.scope==='student')classroom.authenticate(secret,'student');else if(body.scope!=='personal')throw new Error('INVALID_SCOPE');return json(res,200,startTunnel(body.key,body.scope==='student'?secret:null));}
     if(url.pathname==='/api/tunnel/stop') return json(res,200,stopTunnel());
     if(url.pathname==='/api/classroom/account') return json(res,200,classroom.createAccount(body.name,body.role));
-    if(url.pathname==='/api/classroom/create') return json(res,200,{classroom:classroom.createClass(secret,body.title)});
+    if(url.pathname==='/api/classroom/create') {const c=classroom.createClass(secret,body.title),p=learning.profile(secret);learning.setClassScope(secret,{classId:c.id,mode:p.mode==='academy'?'academy':'school',packId:p.packId});return json(res,200,{classroom:c});}
     if(url.pathname==='/api/classroom/invite') return json(res,200,classroom.createInvite(secret,body.classId));
     if(url.pathname==='/api/classroom/join') return json(res,200,classroom.joinClass(secret,body.invite));
     if(url.pathname==='/api/classroom/share') return json(res,200,classroom.setSharing(secret,body.classId,body.enabled));
-    if(url.pathname==='/api/classroom/observation') return json(res,200,{observation:classroom.addObservation(secret,body)});
+    if(url.pathname==='/api/classroom/observation') return json(res,200,{observation:classroom.addObservation(secret,{...body,source:'external'})});
     if(url.pathname==='/api/classroom/lesson') return json(res,200,{lesson:classroom.addLesson(secret,body.classId,body.title,body.content)});
     if(url.pathname==='/api/classroom/lesson/accept') return json(res,200,{lesson:classroom.acceptLesson(secret,body.id,body.content,body.reason)});
     if(url.pathname==='/api/classroom/lesson/propose') {

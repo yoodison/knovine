@@ -1,5 +1,7 @@
 # One learning context, across AI
 
+November 4: personal, school, and academy learners share one account-scoped observation model. The new `get_knowledge_graph` tool exposes selected subject/course scope with evidence. Claude Desktop and Gemini CLI setup includes a learner-scoped local config download; the manual learning-moment importer works with any AI. See [current platform setup](PLATFORM.md#across-ai-clients). Actual host authentication and execution remain separate verification steps.
+
 Knovine is designed to preserve learning observations across the assistants a learner chooses, including Muse, ChatGPT, and Claude. A concept path, original learner words, and class-specific sharing travel through one application-owned state model. Reading a response is not proof of mastery.
 
 ## Current connection paths
