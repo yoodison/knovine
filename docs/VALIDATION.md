@@ -1,5 +1,15 @@
 # Validation record — 29 October 2026
 
+## Submission review — 4 November 2026
+
+- Current public-source checkout: 26 tests and production build passed again.
+- Browser: Connections opened normally. A fresh isolated fictional classroom received a real MCP SDK write. Sharing off removed the teacher-visible observation; sharing on restored it.
+- Browser: the teacher requested a clearly labeled local-rule proposal, edited the lesson, saved it, and inspected the retained original and revision reason.
+- Real Meta Playground retry failed with `Billing verification failed`. No live inference success is claimed. An October 30 support reply identified missing team payment setup.
+- Local review cut v3: a 180-second video track, English synthetic narration and captions, and explicit pre-existing-idea/event-implementation disclosure. Product footage is from October 29. Full FFmpeg decoding passed; browser playback advanced and paused without a video error. The English caption track was detected; its UI mode was disabled during that playback check.
+- The actual submission form contains the updated English review answers. Final promotional consent remains unchecked; the form has not been submitted. Its video link still targets public v2 while the local replacement awaits review.
+- Source license selection remains an owner-review item. A private MIT proposal is not a published license.
+
 ## Discord-informed provider and verification update
 
 - Current local suite: **26 tests passed**, plus production build. Earlier 12-test results below describe the published v2 snapshot.

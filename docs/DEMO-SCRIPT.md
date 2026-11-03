@@ -1,5 +1,7 @@
 # Three-minute working demo
 
+November 4 update: a new local review cut adds the contribution disclosure, states the configured model's live-access limitation explicitly, and updates the closing narration to 26 passing tests. It reuses the October 29 product footage and remains a review artifact while billing and source licensing are unresolved. The published v2 release linked below is still the public fallback; no replacement release or final submission is claimed by this note.
+
 Review build recorded on 29 October 2026. Real local application footage and synthetic English narration. All learner data is fictional. No live model inference is shown.
 
 The timeline below transcribes the published **v2 review recording**. It has not been replaced by the submission-cut plan described at the end.

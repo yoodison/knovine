@@ -4,7 +4,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 import hashlib
 
 root = Path(__file__).resolve().parent.parent
-files = [root / p for p in ['package.json', 'package-lock.json', 'vite.config.js', 'index.html', 'README.md', '.gitignore', '.env.example']]
+files = [root / p for p in ['package.json', 'package-lock.json', 'vite.config.js', 'index.html', 'README.md', 'LICENSE', '.gitignore', '.env.example']]
 public_docs = ['CONTRIBUTIONS.md', 'CONNECTIONS.md', 'DEMO-SCRIPT.md', 'DESIGN.md', 'VALIDATION.md', 'MODEL-PROVIDERS.md']
 files.extend(root / 'docs' / name for name in public_docs)
 for folder in ['src', 'server', 'tests', 'scripts']:

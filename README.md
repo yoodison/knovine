@@ -48,7 +48,7 @@ The model receives the question and recent observations to produce validated JSO
 
 An explicit **Baseten → Meta Muse Spark Open** route is also implemented for an issued hackathon key. It uses validated function arguments because that model does not support JSON Schema output. Both routes reject incomplete or unusable responses before saving. See [provider configuration and live verification steps](docs/MODEL-PROVIDERS.md). This alternative has not yet been verified with a live key.
 
-**Current live status, 29 October 2026:** Meta's official playground rejected the verification request with “Billing verification failed”. Request construction/output validation are tested, but successful live Meta inference is still pending. Without a connected key, the teacher preview uses a visibly labeled local rule.
+**Current live status, 4 November 2026:** Meta's official playground again rejected the verification request with “Billing verification failed”. The 26-test suite and build pass, and the MCP-to-teacher consent/revision workflow was checked again in the browser. Successful live Meta inference remains pending. Without a connected key, the teacher preview uses a visibly labeled local rule.
 
 ## Classroom and connector
 
