@@ -76,3 +76,7 @@ Personal-mode ChatGPT read/write was verified on 28 October. Student-scoped MCP 
 - [Contribution and reuse notes](docs/CONTRIBUTIONS.md)
 - [Design direction and references](docs/DESIGN.md)
 - `python3 scripts/package_submission.py` creates a source-only ZIP in `output/`; it excludes local databases, credentials, tunnel profiles, screenshots, node_modules, and build output.
+
+## License
+
+[MIT](LICENSE). Copyright (c) 2026 Minjun Yoo. Third-party dependencies retain their own licenses.
