@@ -10,7 +10,7 @@ Knovine is designed to preserve learning observations across the assistants a le
 | --- | --- | --- |
 | Learn inside Knovine | Muse Spark 1.3 through Meta Model API | Request construction and response validation tested. Successful live inference remains blocked by billing verification. |
 | Optional in-app model route | Meta Muse Spark Open through Baseten | Tool-output adapter and rejection tests pass. Authorized key and live inference pending. [Setup](MODEL-PROVIDERS.md). |
-| ChatGPT | Private Secure MCP Tunnel | Personal read/write previously verified. Student-scoped protocol tested; full ChatGPT classroom flow pending. |
+| ChatGPT | Private Secure MCP Tunnel | Live ChatGPT web → learner graph → teacher classroom verified on 5 November with fictional learner data. Sharing off/on and retained personal evidence verified. |
 | Claude | Local MCP STDIO server | Protocol tools tested through the SDK. Claude Desktop setup and app verification pending. |
 | Muse agent | Planned Muse connector | Not connected or published. Requires the appropriate authenticated integration and platform verification. |
 

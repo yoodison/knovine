@@ -5,7 +5,10 @@
 - Official Meta Playground: a fresh request now succeeded with `muse-spark-1.3-contributor`. The UI showed 6.1 seconds, 20 input tokens and 41 output tokens. Earlier billing-failure entries below are historical.
 - The local app has no configured Meta key after restart; successful Playground inference does not establish an app-side live request.
 - Added `classId` to the MCP learning-path schema. A real MCP regression check confirms course paths exclude personal paths and reject another class. All 34 tests and the production build pass.
-- The private ChatGPT plugin probe returned unavailable while its tunnel was stopped. ChatGPT and Platform sign-in and the tunnel runtime key are required to continue the actual host test.
+- After sign-in and user-entered runtime key setup, the private tunnel reported ready in student scope. ChatGPT web read existing learner context and saved three new observations through the Knovine plugin.
+- The three ChatGPT-returned observation IDs matched a fresh MCP read-back. The course map grew from 5 concepts / 4 links to 6 concepts / 5 links, with a new Water potential node. Osmosis changed from question to provisional learner explanation while retaining its earlier question.
+- The teacher saw four total moments including one older record. Sharing off reduced teacher-visible moments to zero and removed the conversation-created node from the teacher graph; sharing on restored four moments and the six-node scope. The learner retained four moments, including in the private 159-concept map after browser reload.
+- This uses fictional learner statements and real ChatGPT model/tool execution. No manual-import endpoint or demo bridge was used for these three writes.
 - No Claude extension was installed. The user selected ChatGPT-only verification.
 - No video work or final competition submission was performed.
 
@@ -43,11 +46,11 @@
 - Recorded browser proof: a fresh fictional learner observation was written by a separate MCP client, appeared in the teacher iframe, disappeared with sharing off, and returned with sharing on. The teacher edited and saved a lesson; the original and revision history remained visible.
 - Demo bridge test: a real MCP subprocess write, deduplication, unrelated-teacher rejection, and sharing off/on all passed.
 
-## Still pending or blocked
+## Operational state and remaining checks
 
 - The earlier Meta Playground billing failure was resolved by a successful request on November 5. App-side live inference still requires a configured key.
 - Successful live Meta learning and lesson-revision outputs remain unverified.
-- The private ChatGPT tunnel is stopped. Full ChatGPT student-to-teacher end-to-end verification remains pending.
+- The private ChatGPT student-to-teacher workflow passed on November 5. Continued access requires the local server and authorized private tunnel to remain running.
 - Public app deployment and final competition submission remain pending.
 - Repository and video publication are tracked separately in the README.
 
@@ -67,7 +70,7 @@ The local sample classroom is fictional. It must not be used as evidence of a li
 - 34 tests and production build passed. Added per-learner platform state, 155-concept math / 52-skill English scopes, additive custom course imports, latest-evidence labels, and a real learner-bound MCP configuration round trip.
 - Browser: personal entry took one click with no subject requirement. Choosing math opened 155 concepts; an explicitly imported fictional Gemini learning question appeared as original evidence for Equivalent fractions. Concept selection, zoom/fit, a Fractions-to-Equivalent-fractions route, and source links worked.
 - Browser: an academy teacher created a biology class and a five-concept custom scope. A new invited learner inherited it and could not edit it. An explicitly imported fictional Claude question became visible to the teacher and course graph after class sharing was enabled.
-- The shared MCP test reads the large course scope, records a real tool observation, reads its context, denies another teacher's class, and observes sharing off/on. Actual Claude/Gemini host applications and the full ChatGPT classroom flow remain separate pending checks.
+- The shared MCP test reads the large course scope, records a real tool observation, reads its context, denies another teacher's class, and observes sharing off/on. Actual Claude/Gemini host applications remain pending; the subsequent November 5 entry above records the completed ChatGPT classroom flow.
 - Fresh Meta Playground request still returned Billing verification failed. The team's Billing iframe still displayed no payment methods. The reported card registration is not treated as an inference success.
 - Existing SQLite records were backed up privately before additive schema changes. Earlier personal records remain accessible from the legacy workspace. Local profiles are retained on the device; this is not production authentication.
 - 21st catalog lookup returned HTTP 401. Existing Composer/Dialog patterns were reused. Local 21st review was run; informational findings and final responsive evidence are recorded in the handoff.

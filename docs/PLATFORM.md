@@ -43,7 +43,7 @@ The shared MCP contract is `get_learning_classes`, `get_knowledge_graph`, `get_l
 | Compatible local MCP client | Downloadable learner-scoped STDIO config; real SDK round trip verified | Import settings in the chosen client |
 | Claude Desktop | Local configuration download | Actual Claude application verification pending |
 | Gemini CLI | Compatible STDIO config and guide | Actual Gemini CLI verification pending; consumer Gemini website is separate |
-| ChatGPT | Existing private tunnel UI, defaulting to the current learner scope | Authorized tunnel key/runtime and live host verification required |
+| ChatGPT | Live web read/write → learner map → teacher classroom verified on November 5 | Keep the private tunnel/runtime running; a new installation needs its own authorized setup |
 | Muse agent | Planned connector surface, distinct from Muse Spark | Platform access and host verification pending |
 | Any AI conversation | Explicit paste/import of a learner-approved learning moment | No external integration required for this manual fallback |
 
@@ -55,7 +55,9 @@ For Claude or Gemini CLI, open **Connections → the client → Connect this lea
 
 34 tests and a production build pass. Tests cover larger empty scopes, per-learner isolation, school and academy membership, class consent, custom scope authorization, repeated imports, newest evidence, persistence, real MCP configuration execution, and rejection of a different class. Browser checks cover one-click personal entry, subject selection, concept evidence/path exploration, an academy teacher-created custom course, invitation/join, external learning capture, consent, and teacher visibility.
 
-On November 5, a fresh official Playground request succeeded using `muse-spark-1.3-contributor`. The earlier billing failure is resolved for that tested team/project. The local app still needs an API key before its own live inference can be verified. ChatGPT sign-in and the private tunnel runtime key are also required for the pending host-to-classroom check. No fake model result is substituted.
+On November 5, a fresh official Playground request succeeded using `muse-spark-1.3-contributor`. The earlier billing failure is resolved for that tested team/project. The local app still needs an API key before its own live inference can be verified. The authenticated private ChatGPT tunnel is now running in learner scope, and the web-to-map-to-classroom flow has been verified. No fake model result is substituted.
+
+The live ChatGPT check used a fictional biology learner. ChatGPT read prior context, saved an osmosis question, then saved a learner explanation and a new water-potential question. All three returned IDs matched the stored records. The course map grew from five concepts to six; Osmosis retained its question and gained a provisional explanation. The teacher saw four moments including one older record. Sharing off removed all teacher-visible evidence and the discovered concept; sharing on restored them. The learner retained all four moments and their 159-concept personal scope after page reload. This verifies this permitted private workflow, not passive collection of every chat.
 
 ## Design continuity
 
