@@ -4,7 +4,7 @@ Knovine has two explicit routes to Meta models. There is no automatic fallback a
 
 | Route | Model | Response contract | Live verification |
 | --- | --- | --- | --- |
-| Meta Model API (default) | `muse-spark-1.3` | JSON Schema | Pending billing activation |
+| Meta Model API (default) | `muse-spark-1.3` | JSON Schema | In-app learning and teacher proposals verified on 5 November 2026 |
 | Baseten hackathon Model API | `meta-models/muse-spark-open-1026` | Named function arguments, validated locally | Pending an authorized Baseten key |
 
 ## Configure the server
@@ -32,4 +32,8 @@ The workshop’s separation of model work, independent verification, and human s
 3. With fictional class sharing enabled, request a lesson revision. Confirm it stays a draft until a teacher chooses **Save reviewed plan**.
 4. Record real results only. A configured key, test fixture, example conversation, or local-rule suggestion is not a successful model call.
 
-As of 29 October, automated tests cover both request formats and failure boundaries. Neither live route is certified by those tests. Existing review video v2 predates this provider update.
+On 5 November, real Meta Model API learning turns and two teacher proposals passed the browser/API/SQLite flow. The Baseten route remains unverified with a live key. Existing review videos predate this work and were not updated.
+
+Meta reasoning and visible output share the completion budget. A first live lesson request was rejected as incomplete and left the original untouched. Requests now use explicit `reasoning_effort: low`, a 3,200-token learning budget, a 6,400-token lesson budget, and bounded timeouts (55 and 90 seconds). The revised lesson requests completed. There are no automatic provider switches or hidden retries. See [Meta reasoning](https://dev.meta.ai/docs/reasoning) and [Chat Completions](https://dev.meta.ai/docs/protocols/chat-completions).
+
+One live tutoring answer incorrectly stated that positive turgor pressure lowers water potential. A follow-up explicitly corrected the model's own error; teacher review also refined the lesson wording. Structural validation does not fact-check generated teaching content or certify learner knowledge.

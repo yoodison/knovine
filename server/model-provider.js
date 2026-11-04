@@ -20,15 +20,19 @@ export async function structuredCompletion({ name, schema, messages }, options =
   const apiKey = options.apiKey ?? modelKey(config.provider);
   if (!apiKey) throw new Error('MODEL_KEY_MISSING');
   const toolName = `submit_${name}`;
+  // Reasoning and visible output share the token budget. Leave more room for
+  // a complete lesson while keeping every request bounded and explicit.
+  const lesson = name === 'lesson_proposal';
+  const outputBudget = lesson ? 6400 : 3200;
   // Muse Spark Open supports tools, but not JSON mode/structured outputs.
   // Function arguments are data only: no model-selected code is executed.
   const format = config.provider === 'baseten'
-    ? { max_tokens: 2400, tools: [{ type: 'function', function: {
+    ? { max_tokens: outputBudget, tools: [{ type: 'function', function: {
       name: toolName, description: 'Return the requested result for application validation. This does not save or approve it.', parameters: schema
     } }], tool_choice: { type: 'function', function: { name: toolName } }, parallel_tool_calls: false }
-    : { max_completion_tokens: 2400, response_format: { type: 'json_schema', json_schema: { name, strict: true, schema } } };
+    : { max_completion_tokens: outputBudget, reasoning_effort: 'low', response_format: { type: 'json_schema', json_schema: { name, strict: true, schema } } };
   const response = await (options.fetcher || fetch)(config.endpoint, {
-    method: 'POST', signal: AbortSignal.timeout(55000),
+    method: 'POST', signal: AbortSignal.timeout(lesson ? 90000 : 55000),
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({ model: config.model, messages, ...format })
   });

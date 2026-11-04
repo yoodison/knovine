@@ -39,7 +39,7 @@ The shared MCP contract is `get_learning_classes`, `get_knowledge_graph`, `get_l
 
 | Surface | Working implementation | Remaining host setup |
 | --- | --- | --- |
-| Knovine | Contextual Meta request, learner-owned persistence and graph overlay | Working Meta key/account needed for live inference |
+| Knovine | Contextual Meta request, learner-owned persistence and graph overlay | Live tutoring and teacher plans verified; keep the local server running with an authorized key |
 | Compatible local MCP client | Downloadable learner-scoped STDIO config; real SDK round trip verified | Import settings in the chosen client |
 | Claude Desktop | Local configuration download | Actual Claude application verification pending |
 | Gemini CLI | Compatible STDIO config and guide | Actual Gemini CLI verification pending; consumer Gemini website is separate |
@@ -53,12 +53,14 @@ For Claude or Gemini CLI, open **Connections → the client → Connect this lea
 
 ## Current validation
 
-34 tests and a production build pass. Tests cover larger empty scopes, per-learner isolation, school and academy membership, class consent, custom scope authorization, repeated imports, newest evidence, persistence, real MCP configuration execution, and rejection of a different class. Browser checks cover one-click personal entry, subject selection, concept evidence/path exploration, an academy teacher-created custom course, invitation/join, external learning capture, consent, and teacher visibility.
+37 tests and a production build pass. Tests cover larger empty scopes, per-learner isolation, school and academy membership, class consent, custom scope authorization, repeated imports, newest evidence, persistence, real MCP configuration execution, and rejection of a different class. Browser checks cover one-click personal entry, subject selection, concept evidence/path exploration, an academy teacher-created custom course, invitation/join, external learning capture, consent, and teacher visibility.
 
-On November 5, a fresh official Playground request succeeded using `muse-spark-1.3-contributor`. The earlier billing failure is resolved for that tested team/project. The local app still needs an API key before its own live inference can be verified. The authenticated private ChatGPT tunnel is now running in learner scope, and the web-to-map-to-classroom flow has been verified. No fake model result is substituted.
+On November 5, a fresh official Playground request succeeded using `muse-spark-1.3-contributor`. The earlier billing failure is resolved for that tested team/project. Knovine subsequently completed four real learning turns and two teacher proposals using standard `muse-spark-1.3` through the app. The authenticated private ChatGPT tunnel is now running in learner scope, and the web-to-map-to-classroom flow has been verified. No fake model result is substituted. The Meta tutor reused original ChatGPT-saved learner words, and ChatGPT read the new Meta record back. Two teacher-reviewed plans retained their originals and one saved revision each after reload. A first truncated model proposal was rejected without saving; the completion-budget fix was verified with subsequent live proposals.
 
 The live ChatGPT check used a fictional biology learner. ChatGPT read prior context, saved an osmosis question, then saved a learner explanation and a new water-potential question. All three returned IDs matched the stored records. The course map grew from five concepts to six; Osmosis retained its question and gained a provisional explanation. The teacher saw four moments including one older record. Sharing off removed all teacher-visible evidence and the discovered concept; sharing on restored them. The learner retained all four moments and their 159-concept personal scope after page reload. This verifies this permitted private workflow, not passive collection of every chat.
 
 ## Design continuity
 
 The revision reuses the existing 21st-derived `Composer`, native `Dialog`, classroom controls, quiet light tokens, and typography. The graph has an original deterministic clustered layout. A fresh 21st catalog search returned HTTP 401; no new catalog component or hosted generation is claimed. The local 21st review reported two informational color-token findings in the initial platform review and no fixes. Responsive and interaction checks are documented separately in the validation record.
+
+Teacher entry now separates **Add a lesson** from class management. **Draft with AI** saves the teacher's short outline, then proposes a complete plan from shared class evidence. A failed proposal leaves that outline available for retry. The suggestion receives focus and stays editable until **Save reviewed plan**. An empty class can save an outline first; evidence-based drafting becomes available when a learner shares a moment.

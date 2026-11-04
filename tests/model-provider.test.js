@@ -17,7 +17,7 @@ test('Baseten uses the hackathon Muse model, tool arguments, and its own credent
   assert.equal(request.url,'https://inference.baseten.co/v1/chat/completions');
   assert.equal(request.headers.Authorization,'Bearer baseten-test');
   assert.equal(request.body.model,'meta-models/muse-spark-open-1026');
-  assert.equal(request.body.max_tokens,2400);
+  assert.equal(request.body.max_tokens,3200);
   assert.equal(request.body.response_format,undefined);
   assert.equal(request.body.tools[0].function.strict,undefined);
   assert.equal(request.body.tool_choice.function.name,'submit_learning_turn');

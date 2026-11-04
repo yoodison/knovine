@@ -26,3 +26,7 @@ Third-party packages retain their own licenses. No ownership of third-party desi
 ## November 4 platform work
 
 Personal/school/academy entry, account-scoped learning state, original subject concept inventories, custom course scope import, clustered graph navigation, learner-bound local MCP configuration export, and platform/connector tests were added in this revision. The original math inventory uses the MOE's domain framing as a reference; it is not an imported official graph. See PLATFORM.md for provenance and verified boundaries. The graph layout is original code; the existing 21st-derived Composer and native Dialog are reused. No new video was planned or made for this revision.
+
+## November 5 live integration completion
+
+Verified actual ChatGPT web writes, shared learner maps/classrooms, real in-app Muse Spark 1.3 tutoring, and teacher-reviewed Meta lesson generation. Added one-step AI drafting from a teacher outline, model-state refresh across local tabs, proposal focus and class-switch guards, bounded reasoning/output budgets, newest-evidence selection, and remote-poll-aware tunnel status. The regression suite now contains 37 passing tests. An earlier model content error and an incomplete proposal are documented in VALIDATION.md rather than hidden. No new video or final submission was made.

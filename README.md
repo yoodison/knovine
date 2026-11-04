@@ -33,7 +33,7 @@ Open **http://127.0.0.1:4175/?demo=1** and select **Start isolated demo**. This 
 1. Select **Record through MCP**. A separate MCP SDK client sends a real student-scoped tool call. The live teacher iframe shows one observation after its next refresh.
 2. Open **Alex (demo)** to inspect the original question.
 3. Turn sharing off: the observation disappears from the teacher. Turn it on: it returns.
-4. Open **Next lesson → Adapt lesson**. Without Meta, the suggestion is explicitly labeled as a local rule.
+4. Open **Next lesson → Adapt lesson**. Or add a lesson, enter a short outline and choose **Draft with AI** after Meta is connected and a learner moment is shared. Review and edit the complete proposal before saving. Without Meta, adaptation is explicitly labeled as a local rule.
 5. Edit the suggested lesson, choose **Save reviewed plan**, then open **Original plan & revision history**.
 
 The demo control may only act on its newly created fictional learner. A repeated tool call deduplicates the record. Its in-memory authorization ends when the API restarts. The harness is an engineering demonstration, not an automatic ChatGPT agent or simulated Meta response.
@@ -50,7 +50,7 @@ The model receives the question and recent observations to produce validated JSO
 
 An explicit **Baseten → Meta Muse Spark Open** route is also implemented for an issued hackathon key. It uses validated function arguments because that model does not support JSON Schema output. Both routes reject incomplete or unusable responses before saving. See [provider configuration and live verification steps](docs/MODEL-PROVIDERS.md). This alternative has not yet been verified with a live key.
 
-**Current live status, 5 November 2026:** Meta's official Playground now returns real `muse-spark-1.3-contributor` responses. Provider activation is confirmed for the tested team/project; live inference from Knovine itself still needs a configured API key. The 34-test suite and build pass. The live ChatGPT student-to-map-to-teacher flow is now verified: three new authorized observations persisted, a new concept appeared, and per-class sharing removed/restored teacher visibility. Without a connected model key, the teacher preview uses a visibly labeled local rule.
+**Current live status, 5 November 2026:** Knovine now uses real `muse-spark-1.3` inference through Meta Model API. Four in-app learning turns persisted in the same learner store as three authorized ChatGPT observations. Muse Spark reused the ChatGPT-saved learner words; ChatGPT then read a new Meta-sourced record with the same observation ID. The teacher received eight moments (including one older manual test record), generated both a revised 45-minute plan and a new 30-minute plan, reviewed/edited them, and saved them with their originals and revision history retained after reload. The 37-test suite and production build pass. These checks use a fictional learner, not measured student outcomes. See [validation](docs/VALIDATION.md).
 
 ## Classroom and connector
 

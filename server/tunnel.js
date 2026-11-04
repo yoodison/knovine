@@ -2,14 +2,16 @@ import { spawn } from 'node:child_process';
 import { readFileSync, rmSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createPollMonitor } from './tunnel-health.js';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const healthFile=resolve(root,'data/tunnel-health.url');
-let child=null,lastExit=null,mode=null;
+let child=null,lastExit=null,mode=null,pollHealth=createPollMonitor();
 export function startTunnel(apiKey,studentSession) {
   if(typeof apiKey!=='string'||apiKey.length<20||apiKey.length>500)throw Error('INVALID_TUNNEL_KEY');
   if(child)throw Error('INVALID_TUNNEL_RUNNING');
   rmSync(healthFile,{force:true});
   mode=studentSession?'student':'personal';lastExit=null;
+  pollHealth=createPollMonitor();
   const env={...process.env,CONTROL_PLANE_API_KEY:apiKey};
   if(studentSession)env.KNOVINE_STUDENT_SESSION=studentSession;else delete env.KNOVINE_STUDENT_SESSION;
   child=spawn(resolve(root,'data/bin/tunnel-client'),['run','--profile','knovine','--profile-dir',resolve(root,'data/tunnel-profile'),'--health.url-file',healthFile],{cwd:root,env,stdio:'ignore'});
@@ -19,7 +21,7 @@ export function startTunnel(apiKey,studentSession) {
 }
 export async function tunnelStatus() {
   if(!child)return {running:false,ready:false,lastExit};
-  try {const url=readFileSync(healthFile,'utf8').trim();if(!/^http:\/\/127\.0\.0\.1:\d+$/.test(url))throw Error('bad health url');const response=await fetch(url+'/readyz',{signal:AbortSignal.timeout(1500)});return {running:true,ready:response.ok,mode};} catch{return {running:true,ready:false,mode};}
+  try {const url=readFileSync(healthFile,'utf8').trim();if(!/^http:\/\/127\.0\.0\.1:\d+$/.test(url))throw Error('bad health url');const [response,metrics]=await Promise.all([fetch(url+'/readyz',{signal:AbortSignal.timeout(1500)}),fetch(url+'/metrics',{signal:AbortSignal.timeout(1500)})]);if(!metrics.ok)throw Error('unavailable metrics');const health=pollHealth(await metrics.text());return {running:true,ready:response.ok&&health.ready,error:health.error,mode};} catch{return {running:true,ready:false,mode};}
 }
 export function stopTunnel(){if(child)child.kill('SIGTERM');return {stopping:true};}
 
