@@ -25,6 +25,9 @@ test('downloaded local configuration scopes a real MCP client to the learner and
     assert.ok(!written.isError);assert.equal(c.roster(t.token,t.classId)[0].observations.length,0);
     c.setSharing(s.token,t.classId,true);assert.equal(c.roster(t.token,t.classId)[0].observations.length,1);
     const context=await client.callTool({name:'get_learning_context',arguments:{classId:t.classId}});assert.equal(context.structuredContent.observations.length,1);
+    c.addObservation(s.token,{rawText:'A private question',topic:'Private topic',signal:'question',observation:'Private learning only.',path:['Private start','Private topic']});
+    const paths=await client.callTool({name:'get_learning_path',arguments:{classId:t.classId}});assert.equal(paths.structuredContent.paths.length,1);assert.equal(paths.structuredContent.paths[0].topic,'Equivalent fractions');
+    const deniedPaths=await client.callTool({name:'get_learning_path',arguments:{classId:stranger.classId}});assert.equal(deniedPaths.isError,true);
     const denied=await client.callTool({name:'get_knowledge_graph',arguments:{classId:stranger.classId}});assert.equal(denied.isError,true);
     const updated=await client.callTool({name:'get_knowledge_graph',arguments:{classId:t.classId,topic:'Equivalent fractions'}});assert.equal(updated.structuredContent.nodes[0].state,'question');
     c.setSharing(s.token,t.classId,false);assert.equal(c.roster(t.token,t.classId)[0].observations.length,0);

@@ -1,4 +1,13 @@
-# Validation record — 29 October 2026
+# Validation record — latest check 5 November 2026
+
+## Current check — 5 November 2026
+
+- Official Meta Playground: a fresh request now succeeded with `muse-spark-1.3-contributor`. The UI showed 6.1 seconds, 20 input tokens and 41 output tokens. Earlier billing-failure entries below are historical.
+- The local app has no configured Meta key after restart; successful Playground inference does not establish an app-side live request.
+- Added `classId` to the MCP learning-path schema. A real MCP regression check confirms course paths exclude personal paths and reject another class. All 34 tests and the production build pass.
+- The private ChatGPT plugin probe returned unavailable while its tunnel was stopped. ChatGPT and Platform sign-in and the tunnel runtime key are required to continue the actual host test.
+- No Claude extension was installed. The user selected ChatGPT-only verification.
+- No video work or final competition submission was performed.
 
 ## Submission review — 4 November 2026
 
@@ -36,7 +45,7 @@
 
 ## Still pending or blocked
 
-- A real request in Meta's official playground returned “Billing verification failed”. It is not recorded as an inference success.
+- The earlier Meta Playground billing failure was resolved by a successful request on November 5. App-side live inference still requires a configured key.
 - Successful live Meta learning and lesson-revision outputs remain unverified.
 - The private ChatGPT tunnel is stopped. Full ChatGPT student-to-teacher end-to-end verification remains pending.
 - Public app deployment and final competition submission remain pending.

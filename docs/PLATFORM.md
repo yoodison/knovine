@@ -1,6 +1,6 @@
 # Knovine platform: a shared learner context
 
-Updated 4 November 2026. This revision implements the broader personal/school/academy direction. It does not create or plan a new video.
+Updated 5 November 2026. This revision implements the broader personal/school/academy direction. It does not create or plan a new video.
 
 ## Entry and identity
 
@@ -55,7 +55,7 @@ For Claude or Gemini CLI, open **Connections → the client → Connect this lea
 
 34 tests and a production build pass. Tests cover larger empty scopes, per-learner isolation, school and academy membership, class consent, custom scope authorization, repeated imports, newest evidence, persistence, real MCP configuration execution, and rejection of a different class. Browser checks cover one-click personal entry, subject selection, concept evidence/path exploration, an academy teacher-created custom course, invitation/join, external learning capture, consent, and teacher visibility.
 
-Live Meta inference remains blocked: after a fresh reload and new request on November 4, the official Playground returned `Billing verification failed` and this team's Billing iframe still showed no payment methods. The user's reported card registration is not disputed; provider activation remains unverified. No fake model result is substituted.
+On November 5, a fresh official Playground request succeeded using `muse-spark-1.3-contributor`. The earlier billing failure is resolved for that tested team/project. The local app still needs an API key before its own live inference can be verified. ChatGPT sign-in and the private tunnel runtime key are also required for the pending host-to-classroom check. No fake model result is substituted.
 
 ## Design continuity
 
