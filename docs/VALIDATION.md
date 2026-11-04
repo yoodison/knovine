@@ -3,7 +3,7 @@
 ## Current check — 5 November 2026
 
 - Official Meta Playground: a fresh request now succeeded with `muse-spark-1.3-contributor`. The UI showed 6.1 seconds, 20 input tokens and 41 output tokens. Earlier billing-failure entries below are historical.
-- App-side verification is now complete for standard `muse-spark-1.3`: four real in-app tutoring turns persisted, reusing prior ChatGPT learner words. The teacher received eight total observations: four Meta turns, three real ChatGPT writes, and one older manual fictional record. ChatGPT read back the latest Meta observation ID and original words without writing another record.
+- App-side verification is now complete for standard `muse-spark-1.3`: five real in-app tutoring turns persisted, reusing prior ChatGPT learner words. The teacher received ten total observations: five Meta turns, four real ChatGPT writes, and one older manual fictional record. ChatGPT read back the latest Meta observation ID and original words without writing another record.
 - The teacher generated a revised 45-minute lesson and a new 30-minute lesson from a short outline using Meta. Both proposals stayed unsaved until review; both were edited, accepted, and retained their originals plus one revision after browser reload.
 - The first full lesson request returned incomplete output; the app refused to save it. The provider now gives reasoning and lesson output enough bounded headroom. Subsequent live requests succeeded.
 - A tutoring answer contained a water-potential sign error. The model explicitly corrected its own earlier wording on follow-up. Teacher review refined the plans; these checks verify application behavior, not educational accuracy or measured learning.
@@ -15,7 +15,7 @@
 - The teacher saw four total moments including one older record. Sharing off reduced teacher-visible moments to zero and removed the conversation-created node from the teacher graph; sharing on restored four moments and the six-node scope. The learner retained four moments, including in the private 159-concept map after browser reload.
 - This uses fictional learner statements and real ChatGPT model/tool execution. No manual-import endpoint or demo bridge was used for these three writes.
 - No Claude extension was installed. The user selected ChatGPT-only verification.
-- No video work or final competition submission was performed.
+- A subsequent video-production pass recorded a new real ChatGPT write (`bbb5a393-2c20-425d-b48f-ec9b5c33f136`), its seven-concept/ten-connection course map, another Meta learning turn, and a third teacher-reviewed plan. Sharing off/on changed the teacher view from ten moments to zero and back. Final competition submission remains pending.
 
 ## Submission review — 4 November 2026
 
@@ -53,7 +53,7 @@
 
 ## Operational state and remaining checks
 
-- The earlier Meta billing failure no longer blocks the tested app: four live standard-model tutoring turns and two teacher lesson proposals succeeded on November 5.
+- The earlier Meta billing failure no longer blocks the tested app: five live standard-model tutoring turns and three teacher lesson proposals succeeded on November 5.
 - Meta and private ChatGPT connections are configured in the tested local session. API keys remain memory-only; an API restart requires reconnecting. No key is included in source, screenshots, or the archive.
 - The private ChatGPT student-to-teacher workflow passed on November 5. Continued access requires the local server and authorized private tunnel to remain running.
 - Public app deployment and final competition submission remain pending.

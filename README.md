@@ -6,7 +6,7 @@ A local learner-state platform for personal study, schools, and academies. Start
 
 **November 4 platform revision:** one-click personal onboarding; school/academy learner and teacher paths; a 155-concept mathematics guide and a 52-skill English guide; user-defined course graphs; and learner-scoped MCP configuration downloads. See [platform behavior and verified boundaries](docs/PLATFORM.md). The earlier review video predates this interface revision.
 
-[Watch the three-minute working demo](https://github.com/yoodison/knovine/releases/tag/demo-review-v2) · [Validation](docs/VALIDATION.md)
+[Earlier review video (v2; predates live integration)](https://github.com/yoodison/knovine/releases/tag/demo-review-v2) · [Validation](docs/VALIDATION.md)
 
 ## Run locally
 
@@ -50,7 +50,7 @@ The model receives the question and recent observations to produce validated JSO
 
 An explicit **Baseten → Meta Muse Spark Open** route is also implemented for an issued hackathon key. It uses validated function arguments because that model does not support JSON Schema output. Both routes reject incomplete or unusable responses before saving. See [provider configuration and live verification steps](docs/MODEL-PROVIDERS.md). This alternative has not yet been verified with a live key.
 
-**Current live status, 5 November 2026:** Knovine now uses real `muse-spark-1.3` inference through Meta Model API. Four in-app learning turns persisted in the same learner store as three authorized ChatGPT observations. Muse Spark reused the ChatGPT-saved learner words; ChatGPT then read a new Meta-sourced record with the same observation ID. The teacher received eight moments (including one older manual test record), generated both a revised 45-minute plan and a new 30-minute plan, reviewed/edited them, and saved them with their originals and revision history retained after reload. The 37-test suite and production build pass. These checks use a fictional learner, not measured student outcomes. See [validation](docs/VALIDATION.md).
+**Current live status, 5 November 2026:** Knovine now uses real `muse-spark-1.3` inference through Meta Model API. Five in-app learning turns persisted in the same learner store as four authorized ChatGPT observations. Muse Spark reused the ChatGPT-saved learner words; ChatGPT then read a new Meta-sourced record with the same observation ID. The teacher received ten moments (including one older manual test record), generated three lesson plans, reviewed/edited them, and saved them with their originals and revision history retained. A new ChatGPT question about turgor pressure grew the test course map to seven concepts and ten connections. The 37-test suite and production build pass. These checks use a fictional learner, not measured student outcomes. See [validation](docs/VALIDATION.md).
 
 ## Classroom and connector
 

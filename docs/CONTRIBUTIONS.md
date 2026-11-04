@@ -30,3 +30,7 @@ Personal/school/academy entry, account-scoped learning state, original subject c
 ## November 5 live integration completion
 
 Verified actual ChatGPT web writes, shared learner maps/classrooms, real in-app Muse Spark 1.3 tutoring, and teacher-reviewed Meta lesson generation. Added one-step AI drafting from a teacher outline, model-state refresh across local tabs, proposal focus and class-switch guards, bounded reasoning/output budgets, newest-evidence selection, and remote-poll-aware tunnel status. The regression suite now contains 37 passing tests. An earlier model content error and an incomplete proposal are documented in VALIDATION.md rather than hidden. No new video or final submission was made.
+
+## November 5 demo update
+
+A subsequent production pass recorded a new actual ChatGPT question, its concept-map evidence, a contextual Muse Spark answer and another teacher-reviewed lesson. The English review cut uses Remotion 4.0.540, an MIT Stageshow Window component and framing guidance, Argo 0.42.1 for imported-video chapter/review artifacts, ElevenLabs synthetic narration, local Whisper transcription and FFmpeg. Generated audio and raw captures stay outside this repository. Public video release and final submission await owner review; the older published v2 is labeled as an earlier recording.
