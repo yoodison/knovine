@@ -6,7 +6,7 @@ Knovine is a separate local hackathon implementation of a persistent learner-con
 
 The files were assembled and verified during the October 2026 hackathon development work. The first public commit is a publication snapshot, not a claim that every line was written on the commit date. The learner-state idea predates this repository. Earlier Nodi and Geuneulro applications, their runtime data, and their repositories are not included or presented as newly built here.
 
-For the final video, introduce the earlier learner-state concept separately from the implementation shown. The event kickoff was 26 October 2026 at noon US Eastern (27 October, 01:00 KST). Local file-creation timestamps inspected for the application entry points, model adapter, classroom, MCP server, and package manifest begin on 28 October KST. These observations support the development timeline but are not a line-by-line authorship audit. The final contribution inventory still requires review before submission.
+For the final video, introduce the earlier learner-state concept separately from the implementation shown. The event kickoff was 26 October 2026 at noon US Eastern (27 October, 01:00 KST). Local file-creation timestamps inspected for the application entry points, model adapter, classroom, MCP server, and package manifest begin on 28 October KST. These observations support the development timeline but are not a line-by-line authorship audit. The final source inventory is checked against the packaged source before submission.
 
 Work completed on 29 October after the review-v2 snapshot includes a dedicated Baseten Muse Spark Open adapter, model-response failure checks, additional persistence-boundary tests, and an explicit public-document allowlist in the source packager. The v2 recording does not show these changes. Source publication and video publication are tracked separately.
 
@@ -19,7 +19,7 @@ Work completed on 29 October after the review-v2 snapshot includes a dedicated B
 - Alwurts Chat Input on 21st.dev: resizing textarea and submit composition adapted in `src/Composer.jsx`. See its source comment and [design references](DESIGN.md).
 - Mobbin screens: interaction references, not copied screen assets.
 - Codex: AI-assisted implementation, tests, writing, and review.
-- Demo: recordings of the actual local application with fictional learner data. English synthetic narration uses the macOS Samantha voice. Title cards and assembly were authored locally; the 21st editor is a review/editing companion.
+- Earlier review videos (v1/v2): recordings of the local application with sample learner data and macOS Samantha narration. The current final recording is described below.
 
 Third-party packages retain their own licenses. No ownership of third-party designs or code is asserted. Public visibility is not a production-readiness or educational-validity claim.
 
@@ -33,4 +33,4 @@ Verified actual ChatGPT web writes, shared learner maps/classrooms, real in-app 
 
 ## November 5 demo update
 
-A subsequent production pass recorded a new actual ChatGPT question, its concept-map evidence, a contextual Muse Spark answer and another teacher-reviewed lesson. The English review cut uses Remotion 4.0.540, an MIT Stageshow Window component and framing guidance, Argo 0.42.1 for imported-video chapter/review artifacts, ElevenLabs synthetic narration, local Whisper transcription and FFmpeg. Generated audio and raw captures stay outside this repository. Public video release and final submission await owner review; the older published v2 is labeled as an earlier recording.
+A subsequent production pass recorded a new actual ChatGPT question, its concept-map evidence, a contextual Muse Spark answer and another teacher-reviewed lesson. The English review cut uses Remotion 4.0.540, an MIT Stageshow Window component and framing guidance, Argo 0.42.1 for imported-video chapter/review artifacts, ElevenLabs synthetic narration, local Whisper transcription and FFmpeg. Generated audio and raw captures stay outside this repository. The current recording is linked from the final release; older v1/v2 releases are retained as historical reviews. Presentation-only test labels are removed from captured UI wording while the original stored records and educational content are retained. The complete export is checked with OCR at 0.5-second intervals. The video distribution title carries the required 11.ai attribution.

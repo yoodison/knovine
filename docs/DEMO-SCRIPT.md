@@ -1,8 +1,6 @@
-# Current three-minute demo review
+# Three-minute connected learning demo
 
-Prepared 5 November 2026 for owner review. The new cut uses actual ChatGPT and Meta calls with a fictional learner. The public v2 recording predates this implementation; the new video is not yet published.
-
-The story follows one authorized turgor-pressure question from ChatGPT into the learner map, a Meta explanation using the same context, and a teacher-reviewed lesson. Recording waits are edited for pace. Questions and explanations are provisional evidence, not measured mastery.
+[Watch the final demo](https://github.com/yoodison/knovine/releases/tag/hackathon-final). The video shows actual ChatGPT and Meta calls with a sample class. Waiting time is edited. Presentation-only prefixes and test labels are removed from the recording; source observations remain intact. Questions remain provisional evidence.
 
 ## 00:00 — Your learning, connected
 
@@ -14,7 +12,7 @@ The problem is not a missing answer. It is the missing connection between one co
 
 ## 00:35 — Learn in the AI you already use
 
-Here is the actual workflow, using a fictional student. In ChatGPT, I ask about turgor pressure. With permission, ChatGPT reads my existing class context through the private Knovine connector, answers the question, and records only my learning question. The original words and observation identifier are retained. An AI answer is never stored as proof that I understand it.
+Here is the actual workflow. Using ChatGPT, I ask about turgor pressure. With permission, ChatGPT reads my existing class context through the private Knovine connector, answers the question, and records only my learning question. The original words and observation identifier are retained. An AI answer is never stored as proof that I understand it.
 
 ## 01:00 — A map that grows with you
 
@@ -36,8 +34,8 @@ The learner controls class sharing. Turning it off removes these observations fr
 
 The working local build connects real ChatGPT tool calls, persistent learner maps, and real Meta-generated teacher plans. The broader vision is one learner-owned context layer across the AI tools people choose, with Muse agent integration planned. The learner-state idea came first; this hackathon implementation makes the feedback loop work. Knovine turns a useful question into a better next explanation, and a more informed next lesson.
 
-## Production and disclosure
+## Production and reuse
 
-Remotion 4.0.540 provides the editable timeline and render. The MIT Stageshow Window component frames actual captured product screens. Argo 0.42.1 handles imported-video chapter/review artifacts. A custom synthetic ElevenLabs English voice is used; no real speaker is cloned. The end card identifies 11.ai. The current Free-plan narration is for non-commercial review; commercial use requires eligible rights at generation time. Runtime data, keys, raw captures and generated audio are excluded from the public source archive.
+Remotion 4.0.540 provides the editable timeline. The MIT Stageshow Window component frames the recorded app. Argo 0.42.1 prepares chapters and review clips. Narration is a synthetic ElevenLabs voice, with quiet room tone and microphone styling; no real speaker was cloned. The public video title includes 11.ai attribution. The observed Free-plan recording is for non-commercial use; commercial/promotional reuse requires a newly generated asset under eligible rights. Source-code MIT licensing does not extend to generated audio rights.
 
-The learner-state idea predates the event. The implementation and reused tools are disclosed in CONTRIBUTIONS.md. Muse agent remains planned; the working Meta model is in-app Muse Spark 1.3. The competition form remains unsubmitted for owner review.
+Runtime records, keys, raw captures and generated audio are excluded from this repository. The learner-state idea predates the event; implementation and reused tools are recorded in [CONTRIBUTIONS.md](CONTRIBUTIONS.md). The external Muse agent connector is planned; the working in-app model is Muse Spark 1.3.

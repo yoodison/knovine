@@ -1,42 +1,52 @@
 # Knovine
 
-**Your understanding, connected.**
+**Your learning, connected.**
 
-A local learner-state platform for personal study, schools, and academies. Start with a question or choose a subject scope; keep learning evidence across compatible AI clients; connect selected observations to a teacher's next lesson. Students control per-class sharing, and teachers review proposed changes before saving.
+Turn everyday AI conversations into learner-owned context and a better next lesson.
 
-**November 4 platform revision:** one-click personal onboarding; school/academy learner and teacher paths; a 155-concept mathematics guide and a 52-skill English guide; user-defined course graphs; and learner-scoped MCP configuration downloads. See [platform behavior and verified boundaries](docs/PLATFORM.md). The earlier review video predates this interface revision.
+[Watch the 3-minute demo](https://github.com/yoodison/knovine/releases/tag/hackathon-final) · [Verified behavior](docs/VALIDATION.md) · [Connections](docs/CONNECTIONS.md) · [Development and reuse](docs/CONTRIBUTIONS.md)
 
-[Earlier review video (v2; predates live integration)](https://github.com/yoodison/knovine/releases/tag/demo-review-v2) · [Validation](docs/VALIDATION.md)
+## The connected learning loop
 
-## Run locally
+1. **Learn in the AI you use.** ChatGPT can read authorized learner context and save the learner's original question through Knovine's private MCP connector. Muse Spark also powers learning inside Knovine.
+2. **See how ideas connect.** A persistent concept map keeps the original evidence, suggested connections and next learning paths. Personal study can start with an empty map or a subject guide.
+3. **Make the next lesson more informed.** Learners choose what to share with a class. The teacher inspects those questions, generates a complete lesson with Meta, and reviews and edits it before saving. Originals and revision history remain available.
+
+Personal, school and academy entry paths share the same learner-state layer. Included subject guides cover 155 mathematics concepts and 52 English skills. Teachers can define a course's own concept scope.
+
+### What the demo shows
+
+Actual ChatGPT calls, persistent learner/class records, in-app Muse Spark 1.3 explanations, a teacher-reviewed Meta lesson, and sharing controls. The course map grows with a turgor-pressure question linked to osmosis and water potential.
+
+The recorded case uses a sample class. Application code enforces access and saving; model output is reviewed evidence, never an automatic mastery score. The external Muse agent connector is planned, separate from the working in-app Muse Spark model.
+
+## Run the app
 
 Requires Node.js 22.13+ with `node:sqlite` support, npm, and a browser.
 
 ```sh
 npm ci
 npm run api
-# In another terminal:
+```
+
+In another terminal:
+
+```sh
 npm run dev
 ```
 
-Open http://127.0.0.1:4175. Choose **For myself → Start learning** to begin without a fixed subject, or select a subject first. School and academy users can create a class or join with an invite. Local browser profiles retain their learning records; use fictional data. Earlier local records remain at `/?legacy=1`. The isolated fictional protocol demonstration remains at `/?demo=1`.
+Open **http://127.0.0.1:4175**. Choose **For myself → Start learning**, or create/join a school or academy class. Records persist in `data/learning.sqlite`. Use sample data: this is a local development implementation, not a hosted school service.
 
 ```sh
 npm test
 npm run build
 ```
 
-## Reproduce the working demo
+The integration check passes **37 tests and the production build**. Provider setup and host-specific verification are documented below.
 
-Open **http://127.0.0.1:4175/?demo=1** and select **Start isolated demo**. This creates a separate fictional teacher, student, class, and text lesson.
+## Reproduce a fresh protocol demo
 
-1. Select **Record through MCP**. A separate MCP SDK client sends a real student-scoped tool call. The live teacher iframe shows one observation after its next refresh.
-2. Open **Alex (demo)** to inspect the original question.
-3. Turn sharing off: the observation disappears from the teacher. Turn it on: it returns.
-4. Open **Next lesson → Adapt lesson**. Or add a lesson, enter a short outline and choose **Draft with AI** after Meta is connected and a learner moment is shared. Review and edit the complete proposal before saving. Without Meta, adaptation is explicitly labeled as a local rule.
-5. Edit the suggested lesson, choose **Save reviewed plan**, then open **Original plan & revision history**.
-
-The demo control may only act on its newly created fictional learner. A repeated tool call deduplicates the record. Its in-memory authorization ends when the API restarts. The harness is an engineering demonstration, not an automatic ChatGPT agent or simulated Meta response.
+`/?demo=1` is a separate, isolated engineering harness for MCP recording, duplicate protection and sharing changes. Its **Record through MCP** button sends an actual student-scoped SDK call. It does not simulate a ChatGPT conversation or a Meta response. For the recorded live-client flow, configure the ChatGPT tunnel and Meta key described below.
 
 ## AI connections
 
@@ -66,19 +76,25 @@ Personal-mode ChatGPT read/write was verified on 28 October. The full student-sc
 
 ## Boundaries
 
-- Runs on one computer with SQLite in `data/learning.sqlite`; preserve this folder when updating.
-- Local classroom bearer sessions are held in browser session storage. This is not production authentication and session recovery is not implemented.
-- Personal API and local MCP are not suitable for public exposure. Do not deploy this server to the internet or enter real student records.
-- Lesson input is text. PPT/PDF editing, school integration, formal mastery assessment, validated forgetting models, and learning-outcome evidence are not implemented.
-- No public app deployment or final competition submission has been completed. The source is public for review.
+- Runs on one computer with SQLite. Preserve `data/learning.sqlite` when updating.
+- Classroom sessions are local bearer sessions, not production authentication. Session recovery is not implemented.
+- Personal APIs and local MCP are not intended for public exposure or real student records.
+- Lesson input is text. PPT/PDF editing, institutional deployment, validated forgetting models and measured learning gains are future work.
+- Public source and a demonstration video are provided; no public app deployment is claimed.
 
-## Review artifacts
+## Project guide
 
-- [Three-minute demo and narration](docs/DEMO-SCRIPT.md)
-- [Contribution and reuse notes](docs/CONTRIBUTIONS.md)
-- [Design direction and references](docs/DESIGN.md)
-- `python3 scripts/package_submission.py` creates a source-only ZIP in `output/`; it excludes local databases, credentials, tunnel profiles, screenshots, node_modules, and build output.
+| Document | Purpose |
+| --- | --- |
+| [Platform](docs/PLATFORM.md) | Personal, school and academy paths; concept guides |
+| [Connections](docs/CONNECTIONS.md) | ChatGPT and compatible MCP client setup |
+| [Model providers](docs/MODEL-PROVIDERS.md) | Meta and optional adapter configuration |
+| [Validation](docs/VALIDATION.md) | Live checks, tests and remaining boundaries |
+| [Demo](docs/DEMO-SCRIPT.md) | Three-minute story and recording notes |
+| [Contributions](docs/CONTRIBUTIONS.md) | Development history, reused tools and licenses |
+
+`python3 scripts/package_submission.py` creates a source-only ZIP in `output/`. Databases, credentials, tunnel profiles, captures, generated audio, dependencies and build output are excluded.
 
 ## License
 
-[MIT](LICENSE). Copyright (c) 2026 Minjun Yoo. Third-party dependencies retain their own licenses.
+[MIT](LICENSE). Copyright (c) 2026 Minjun Yoo. Dependencies and third-party media retain their own licenses.
